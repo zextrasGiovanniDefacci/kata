@@ -1,6 +1,15 @@
+export const DEFAULT_CHARACTER: Character = {
+    health: 1000,
+    level: 1,
+};
+
 export type Character = {
     health: number
     level: number
+}
+
+export function createCharacter(): Character {
+    return {...DEFAULT_CHARACTER};
 }
 
 export function isAlive({health}:Character):boolean {
