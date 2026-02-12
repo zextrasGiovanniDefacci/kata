@@ -7,6 +7,7 @@ export type Character = {
     health: number
     level: number
     id: string
+    type: "Melee" | "Ranged"
 }
 
 export function createCharacter(value: Omit<Character, 'id'> = DEFAULT_CHARACTER): Character {
@@ -38,4 +39,9 @@ export function heal(targetCharacter:Character, heal:number):Character {
         ...targetCharacter,
         health: health > MAX_HEALTH_VALUE ? 1000 : health,
     }
+}
+
+
+export function maxRange(character:Character) {
+    return (character.type === "Melee") ? 2: 20;
 }
