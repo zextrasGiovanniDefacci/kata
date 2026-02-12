@@ -21,7 +21,9 @@ export function dealDamage(sourceCharacter: Character, targetCharacter:Character
     if(sourceCharacter.id === targetCharacter.id) {
         return targetCharacter;
     }
-    const health = targetCharacter.health - damage;
+    const realDamage = (sourceCharacter.level - targetCharacter.level) >= 5 ? damage * 2 : 
+        (targetCharacter.level - sourceCharacter.level) >= 5 ? damage / 2 : damage; 
+    const health = targetCharacter.health - realDamage;
     return {
         ...targetCharacter,
         health: health < 0 ? 0 : health,

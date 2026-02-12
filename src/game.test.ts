@@ -37,4 +37,19 @@ describe("game", () => {
         expect(dealDamage(character, character, 42)).toMatchObject({ health: 100, level: 1});
     })
 
+    test('if the target is 5 or more Levels above the attacker, Damage is reduced by 50%', () => {
+        expect(dealDamage(sourceCharacter, createCharacter({ health: 100, level: 7}), 42)).toMatchObject({ health: 79, level: 7});
+    }) 
+
+    test('If the target is 5 or more Levels below the attacker, Damage is increased by 50%', () => {
+        expect(dealDamage({...sourceCharacter, level:7}, createCharacter({ health: 100, level: 1}), 42)).toMatchObject({ health: 16, level: 1});
+    }) 
+
+    test('if the target is 5 Levels above the attacker, Damage is reduced by 50%', () => {
+        expect(dealDamage(sourceCharacter, createCharacter({ health: 100, level: 6}), 42)).toMatchObject({ health: 79, level: 6});
+    }) 
+
+    test('If the target is 5 Levels below the attacker, Damage is increased by 50%', () => {
+        expect(dealDamage({...sourceCharacter, level:6}, createCharacter({ health: 100, level: 1}), 42)).toMatchObject({ health: 16, level: 1});
+    }) 
 });
